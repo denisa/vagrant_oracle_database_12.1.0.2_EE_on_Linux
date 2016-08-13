@@ -534,7 +534,7 @@ or
       group_install          => 'oinstall',
       downloadDir            => '/install',
       remoteFile             => false,
-      puppetDownloadMntPoint => "/software",
+      puppetDownloadMntPoint => "/variant/software",
       logoutput              => true,
     }
 

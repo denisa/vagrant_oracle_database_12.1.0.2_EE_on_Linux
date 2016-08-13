@@ -63,7 +63,7 @@ or Java 8 and with rsa keySize Fix
         downloadDir          => "/data/install",
         urandomJavaFix       => true,
         rsakeySizeFix        => false,
-        sourcePath           => "/software",
+        sourcePath           => "/variant/software",
       }
 
 or with cryptography Extension File US export
@@ -77,7 +77,7 @@ or with cryptography Extension File US export
 	      urandomJavaFix            => true,
 	      rsakeySizeFix             => true,
 	      cryptographyExtensionFile => "UnlimitedJCEPolicyJDK7.zip",
-	      sourcePath                => "/software",
+	      sourcePath                => "/variant/software",
 	  }
 
 

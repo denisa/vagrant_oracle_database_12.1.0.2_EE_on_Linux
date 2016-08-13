@@ -17,7 +17,7 @@ describe 'oradb::installdb', :type => :define do
           :remoteFile              => true,
           :zipExtract              => true,
           :downloadDir             => '/install',
-          :puppetDownloadMntPoint  => '/software',
+          :puppetDownloadMntPoint  => '/variant/software',
                 }}
     let(:title) {'12.1.0.1_Linux-x86-64'}
     let(:facts) {{ :operatingsystem => 'CentOS' ,
@@ -59,7 +59,7 @@ describe 'oradb::installdb', :type => :define do
     describe "oradb file1" do
       it { 
            should contain_file("/install/linuxamd64_12c_database_1of2.zip").with({
-             'source'  => '/software/linuxamd64_12c_database_1of2.zip',
+             'source'  => '/variant/software/linuxamd64_12c_database_1of2.zip',
            }).that_comes_before('Exec[extract /install/linuxamd64_12c_database_1of2.zip]').that_requires('Oradb::Utils::Structure[oracle structure 12.1.0.1]')    
          }  
     end
@@ -75,7 +75,7 @@ describe 'oradb::installdb', :type => :define do
     describe "oradb file2" do
       it do 
         should contain_file("/install/linuxamd64_12c_database_2of2.zip").with({
-             'source'  => '/software/linuxamd64_12c_database_2of2.zip',
+             'source'  => '/variant/software/linuxamd64_12c_database_2of2.zip',
            }).that_comes_before('Exec[extract /install/linuxamd64_12c_database_2of2.zip]').that_requires('File[/install/linuxamd64_12c_database_1of2.zip]')  
       end
     end
@@ -143,7 +143,7 @@ describe 'oradb::installdb', :type => :define do
           :remoteFile              => false,
           :zipExtract              => true,
           :downloadDir             => '/install',
-          :puppetDownloadMntPoint  => '/software',
+          :puppetDownloadMntPoint  => '/variant/software',
                 }}
     let(:title) {'11.2.0.4_Linux-x86-64'}
     let(:facts) {{ :operatingsystem => 'CentOS' ,
@@ -185,7 +185,7 @@ describe 'oradb::installdb', :type => :define do
     describe "oradb extract file1" do
       it { 
            should contain_exec("extract /install/p13390677_112040_Linux-x86-64_1of7.zip").with({
-             'command'  => 'unzip -o /software/p13390677_112040_Linux-x86-64_1of7.zip -d /install/p13390677_112040_Linux-x86-64',
+             'command'  => 'unzip -o /variant/software/p13390677_112040_Linux-x86-64_1of7.zip -d /install/p13390677_112040_Linux-x86-64',
            }).that_requires('Oradb::Utils::Structure[oracle structure 11.2.0.4]')  
          }  
     end
@@ -193,7 +193,7 @@ describe 'oradb::installdb', :type => :define do
     describe "oradb extract file2" do
       it { 
            should contain_exec("extract /install/p13390677_112040_Linux-x86-64_2of7.zip").with({
-             'command'  => 'unzip -o /software/p13390677_112040_Linux-x86-64_2of7.zip -d /install/p13390677_112040_Linux-x86-64',
+             'command'  => 'unzip -o /variant/software/p13390677_112040_Linux-x86-64_2of7.zip -d /install/p13390677_112040_Linux-x86-64',
            }).that_requires('Exec[extract /install/p13390677_112040_Linux-x86-64_1of7.zip]')  
          }  
     end
@@ -253,7 +253,7 @@ describe 'oradb::installdb', :type => :define do
           :remoteFile              => false,
           :zipExtract              => false,
           :downloadDir             => '/mnt',
-          :puppetDownloadMntPoint  => '/software',
+          :puppetDownloadMntPoint  => '/variant/software',
                 }}
     let(:title) {'11.2.0.3_Linux-x86-64'}
     let(:facts) {{ :operatingsystem => 'OracleLinux' ,
