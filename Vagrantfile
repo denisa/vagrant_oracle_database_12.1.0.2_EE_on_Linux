@@ -12,7 +12,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     db12c102.vm.hostname = "db12c.example.com"
     db12c102.vm.synced_folder ".", "/vagrant", :mount_options => ["dmode=777","fmode=777"]
-    db12c102.vm.synced_folder "C:\\Users\\lucas_j\\Downloads", "/software"
 
     db12c102.vm.network :private_network, ip: "10.10.10.9"
   
