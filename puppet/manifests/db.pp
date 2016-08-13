@@ -1,7 +1,7 @@
 node 'db12c.example.com' {
   include oradb_os
   include oradb_12c
-} 
+}
 
 # operating settings for Database & Middleware
 class oradb_os {
@@ -43,7 +43,7 @@ class oradb_os {
   user { 'oracle' :
     ensure      => present,
     uid         => 500,
-    gid         => 'oinstall',  
+    gid         => 'oinstall',
     groups      => $groups,
     shell       => '/bin/bash',
     password    => '$1$DSJ51vh6$4XzzwyIOk6Bi/54kglGk3.',
@@ -72,7 +72,7 @@ class oradb_os {
                 },
      use_hiera => false,
   }
- 
+
   sysctl { 'kernel.msgmnb':                 ensure => 'present', permanent => 'yes', value => '65536',}
   sysctl { 'kernel.msgmax':                 ensure => 'present', permanent => 'yes', value => '65536',}
   sysctl { 'kernel.shmmax':                 ensure => 'present', permanent => 'yes', value => '2588483584',}
@@ -95,25 +95,25 @@ class oradb_os {
 class oradb_12c {
   require oradb_os
 
-oradb::installdb{ '12.1.0.2_Linux-x86-64':
-  version                => '12.1.0.2',
-  file                   => 'linuxamd64_12102_database',
-  # LJ: currently, the installer only supports installation of the EE (Enterprise Edition)
-  databaseType           => 'EE',
-  oracleBase             => '/oracle',
-  oracleHome             => '/oracle/product/12.1/db',
-  createUser             => true,
-  bashProfile            => true,
-  user                   => hiera('oracle_os_user'),
-  group                  => hiera('oracle_os_group'),
-  group_install          => 'oinstall',
-  group_oper             => 'oper',
-  downloadDir            => hiera('oracle_download_dir'),
-  zipExtract             => true,
-  #LJ: I am assuming that the install files have been downloaded to the host and can be accessed from within the guest in the directory that has been specified in the yaml file as oracle_source 
-  puppetDownloadMntPoint => hiera('oracle_source'),
-  remoteFile              => false,
-  }
+    oradb::installdb{ '12.1.0.2_Linux-x86-64':
+      version                => '12.1.0.2',
+      file                   => 'linuxamd64_12102_database',
+      # LJ: currently, the installer only supports installation of the EE (Enterprise Edition)
+      databaseType           => 'EE',
+      oracleBase             => hiera('oracle_base_dir'),
+      oracleHome             => hiera('oracle_home_dir'),
+      createUser             => true,
+      bashProfile            => true,
+      user                   => hiera('oracle_os_user'),
+      group                  => hiera('oracle_os_group'),
+      group_install          => 'oinstall',
+      group_oper             => 'oper',
+      downloadDir            => hiera('oracle_download_dir'),
+      zipExtract             => true,
+      #LJ: I am assuming that the install files have been downloaded to the host and can be accessed from within the guest in the directory that has been specified in the yaml file as oracle_source
+      puppetDownloadMntPoint => hiera('oracle_source'),
+      remoteFile             => false,
+      }
 
     oradb::linkjava{ 'Link to Java':
       oracleBase             => hiera('oracle_base_dir'),
@@ -138,11 +138,11 @@ oradb::installdb{ '12.1.0.2_Linux-x86-64':
       oracleHome   => hiera('oracle_home_dir'),
       user         => hiera('oracle_os_user'),
       group        => hiera('oracle_os_group'),
-      action       => 'start',  
+      action       => 'start',
       require      => Oradb::Net['config net8'],
     }
 
-    oradb::database{ 'oraDb': 
+    oradb::database{'oraDb':
       oracleBase              => hiera('oracle_base_dir'),
       oracleHome              => hiera('oracle_home_dir'),
       version                 => '12.1',
@@ -162,11 +162,11 @@ oradb::installdb{ '12.1.0.2_Linux-x86-64':
       sampleSchema            => 'FALSE',
       memoryPercentage        => "40",
       memoryTotal             => "800",
-      databaseType            => "MULTIPURPOSE",                         
+      databaseType            => "MULTIPURPOSE",
       require                 => Oradb::Listener['start listener'],
     }
 
-    oradb::dbactions{ 'start oraDb': 
+    oradb::dbactions{ 'start oraDb':
       oracleHome              => hiera('oracle_home_dir'),
       user                    => hiera('oracle_os_user'),
       group                   => hiera('oracle_os_group'),
@@ -175,7 +175,7 @@ oradb::installdb{ '12.1.0.2_Linux-x86-64':
       require                 => Oradb::Database['oraDb'],
     }
 
-    oradb::autostartdatabase{ 'autostart oracle': 
+    oradb::autostartdatabase{ 'autostart oracle':
       oracleHome              => hiera('oracle_home_dir'),
       user                    => hiera('oracle_os_user'),
       dbName                  => hiera('oracle_database_name'),
