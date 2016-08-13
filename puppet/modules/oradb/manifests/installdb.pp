@@ -145,6 +145,21 @@ define oradb::installdb(
       }
     }
 
+    if ( $version in ['12.1.0.4']){
+       exec { "install jdk 7 ":
+         command     => "make -f ${ORACLE_HOME}/rdbms/lib/ins_rdbms.mk javavm_setup_default_jdk",
+         creates     => "${oracleHome}/dbs",
+         timeout     => 0,
+         returns     => [6,0],
+         path        => $execPath,
+         user        => $user,
+         group       => $group_install,
+         logoutput   => true,
+         require     => [Oradb::Utils::Orainst["database orainst ${version}"],
+                         File["${downloadDir}/db_install_${version}.rsp"]],
+       }
+    }
+
     oradb::utils::orainst{"database orainst ${version}":
       ora_inventory_dir => $oraInventory,
       os_group          => $group_install,

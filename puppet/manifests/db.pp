@@ -115,13 +115,22 @@ oradb::installdb{ '12.1.0.2_Linux-x86-64':
   remoteFile              => false,
   }
 
+    oradb::linkjava{ 'Link to Java':
+      oracleBase             => hiera('oracle_base_dir'),
+      oracleHome             => hiera('oracle_home_dir'),
+      javaVersion            => '7',
+      user                   => hiera('oracle_os_user'),
+      group                  => hiera('oracle_os_group'),
+      require                => Oradb::Installdb['12.1.0.2_Linux-x86-64'],
+   }
+
     oradb::net{ 'config net8':
       oracleHome   => hiera('oracle_home_dir'),
       version      => '12.1',
       user         => hiera('oracle_os_user'),
       group        => hiera('oracle_os_group'),
       downloadDir  => hiera('oracle_download_dir'),
-      require      => Oradb::Installdb['12.1.0.2_Linux-x86-64'],
+      require      => Oradb::Linkjava['Link to Java'],
     }
 
     oradb::listener{'start listener':
