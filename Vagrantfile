@@ -12,6 +12,7 @@ Vagrant.configure("2") do |config|
 
 
     db12c102.vm.network :private_network, ip: "10.10.10.9"
+    db12c102.vm.network :forwarded_port, guest: 1521, host: 1521
 
     db12c102.vm.provider :virtualbox do |vb|
       vb.name   = "db12c102"
