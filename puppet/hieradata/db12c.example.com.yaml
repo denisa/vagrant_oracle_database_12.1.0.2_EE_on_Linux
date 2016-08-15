@@ -8,7 +8,7 @@ oracle_home_dir:          '/oracle/product/12.1/db'
 oracle_os_user:           "oracle"
 oracle_os_group:          "dba"
 oracle_download_dir:      "/var/tmp/install"
-oracle_source:            "/variant/software"
+oracle_source:            "/vagrant/software"
 
 oracle_database_name:         'db12102'
 oracle_database_domain_name:  'example.com'  

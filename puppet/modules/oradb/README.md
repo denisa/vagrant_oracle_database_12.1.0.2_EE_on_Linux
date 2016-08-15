@@ -534,7 +534,7 @@ or
       group_install          => 'oinstall',
       downloadDir            => '/install',
       remoteFile             => false,
-      puppetDownloadMntPoint => "/variant/software",
+      puppetDownloadMntPoint => "/vagrant/software",
       logoutput              => true,
     }
 

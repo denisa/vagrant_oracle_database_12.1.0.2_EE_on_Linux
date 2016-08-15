@@ -17,7 +17,7 @@ describe 'oradb::installdb', :type => :define do
           :remoteFile              => false,
           :zipExtract              => false,
           :downloadDir             => '/install',
-          :puppetDownloadMntPoint  => '/variant/software',
+          :puppetDownloadMntPoint  => '/vagrant/software',
                 }}
     let(:title) {'10.2.0.4_Linux-x86-64'}
     let(:facts) {{ :operatingsystem => 'CentOS' ,
@@ -46,7 +46,7 @@ describe 'oradb::installdb', :type => :define do
           :remoteFile              => false,
           :zipExtract              => false,
           :downloadDir             => '/install',
-          :puppetDownloadMntPoint  => '/variant/software',
+          :puppetDownloadMntPoint  => '/vagrant/software',
                 }}
     let(:title) {'11.2.0.4_Linux-x86-64'}
     let(:facts) {{ :operatingsystem => 'Windows' ,
@@ -76,7 +76,7 @@ describe 'oradb::installdb', :type => :define do
           :remoteFile              => false,
           :zipExtract              => false,
           :downloadDir             => '/install',
-          :puppetDownloadMntPoint  => '/variant/software',
+          :puppetDownloadMntPoint  => '/vagrant/software',
                 }}
     let(:title) {'11.2.0.4_Linux-x86-64'}
     let(:facts) {{ :operatingsystem => 'CentOS' ,

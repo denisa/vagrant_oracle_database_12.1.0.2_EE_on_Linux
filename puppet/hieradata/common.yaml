@@ -13,7 +13,7 @@ hosts:
 #wls_os_user:              &wls_os_user              "oracle"
 #wls_os_group:             &wls_os_group             "dba"
 #wls_download_dir:         &wls_download_dir         "/var/tmp/install"
-#wls_source:               &wls_source               "/variant/software"
+#wls_source:               &wls_source               "/vagrant/software"
 #wls_jdk_home_dir:         &wls_jdk_home_dir         "/usr/java/latest"
 #wls_log_dir:              &wls_log_dir              "/var/log/weblogic"
 
