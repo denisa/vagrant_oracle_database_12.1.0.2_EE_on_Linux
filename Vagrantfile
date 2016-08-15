@@ -19,7 +19,11 @@ Vagrant.configure("2") do |config|
       vb.cpus   = 2
     end
 
-    db12c102.vm.provision :shell, :inline => "ln -sf /vagrant/puppet/hiera.yaml /etc/puppet/hiera.yaml;rm -rf /etc/puppet/modules;ln -sf /vagrant/puppet/modules /etc/puppet/modules"
+    db12c102.vm.provision :shell, inline: <<-SHELL
+      ln -sf /vagrant/puppet/hiera.yaml /etc/puppet/hiera.yaml
+      rm -rf /etc/puppet/modules
+      ln -sf /vagrant/puppet/modules /etc/puppet/modules
+    SHELL
 
     db12c102.vm.provision :puppet do |puppet|
       puppet.manifests_path = "puppet/manifests"
