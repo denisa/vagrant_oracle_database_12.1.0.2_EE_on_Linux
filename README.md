@@ -11,7 +11,9 @@ The passwords for sys and system are oracle.
 
 The OS users root and  vagrant have vagrant as password. User oracle has oracle as password.
 
-De Database SID is db12102.
+The Database SID is db12102:
+
+The jdbc url is `jdbc:oracle:thin:@10.10.10.9:1521:db12102`
 
 All configuration is done in just a few files:
 
