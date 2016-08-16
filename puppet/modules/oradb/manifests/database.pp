@@ -108,7 +108,12 @@ define oradb::database( $oracleBase               = undef,
         creates      => "${oracleBase}/admin/${dbName}",
         timeout      => 0,
       }
-    } elsif $action == 'delete' {
+      exec { "Rename init.ora for ${dbName}":
+        command      => "mv ${oracleHome}/dbs/init.ora ${oracleHome}/dbs/init${dbName}.ora",
+        require      => Exec["install oracle database ${title}"],
+        creates      => "${oracleHome}/dbs/init${dbName}.ora",
+      }
+   } elsif $action == 'delete' {
       exec { "delete oracle database ${title}":
         command      => "dbca -silent -responseFile ${filename}",
         require      => File[$filename],
