@@ -25,7 +25,7 @@ define oradb::linkjava(
   exec { "Re-link oracle":
     cwd            => "${oracleHome}/rdbms/lib",
     command        => "/usr/bin/make -f ins_rdbms.mk ioracle",
-      environment  => ["ORACLE_HOME=${oracleHome}", "ORACLE_BASE=${oracleBase}", "LD_LIBRARY_PATH=${oracleHome}/lib"],
+    environment    => ["ORACLE_HOME=${oracleHome}", "ORACLE_BASE=${oracleBase}", "LD_LIBRARY_PATH=${oracleHome}/lib"],
     user           => $user,
     group          => $group,
     require        => Exec["Set to java ${javaVersion}"],
