@@ -26,3 +26,12 @@ puppet\manifests\db.pp
 
 All other files are reused Puppet modules - largely supplied by Edwin.
 Note: These configuration files are based on the work done by Edwin Biemond and use his Oradb Puppet Module (see https://github.com/biemond/biemond-oradb)
+
+Once the instance is up, create a user with:
+
+```
+vagrant ssh
+su - oracle
+export ORACLE_SID=db12102
+/vagrant/createUser.sh <user> <password> 
+```
